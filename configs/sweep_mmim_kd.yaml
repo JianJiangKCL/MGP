@@ -1,0 +1,74 @@
+project: mmim_affection_third_trainval_3090_final
+
+
+program: main.py
+name: mtl_seed
+method: grid
+
+# configs and arguments need to be specified in parameters
+parameters:
+  arch :
+    values: ['infomax']
+
+  dataset:
+    values: [ udiva ]
+
+  cpc_layers:
+    values: [ 2 ]
+
+  dropout_prj:
+    values: [0.3 ]
+  lr:
+    values: [0.001]
+
+  wandb_mode:
+    values: ["online"]
+  scheduler:
+    values: ["constant"]
+  optimizer:
+        values: ["adam"]
+  seed:
+    values: [6, 1995, 1996]
+
+  epochs:
+    values: [1]
+  beta:
+    values: [0.5, 1, 2]
+  gamma:
+    values: [ 8 ]
+  finetune:
+    values: ["/DATA/jj/affection/mmim_results/second/ttt/text_facebody_audio_lr0.001_e1_seedsss_optadam_bs128_beta0.5_alpha_0.1_gamma_1.0_beta_0.5_sigma_0.1_cpc2_dropout_0.3/last.ckpt"]
+
+  modalities:
+     values: [ "text_facebody_audio"]
+
+  is_baseline:
+    values: [0]
+
+  is_incremental:
+    values: [1]
+
+  use_distribution_loss:
+    values: [1]
+
+  target_sensitive_group:
+    values: ["age", 'gender']
+
+  results_dir:
+    values: ["/DATA/jj/affection/mmim_results/third_trainval_a3090_from_dropout0.3"]
+
+  batch_size:
+    values: [128]
+  eval_every_n_epoch:
+    values: [ 1 ]
+metric:
+  goal: minimize
+  name: test_loss
+
+
+
+
+
+
+
+

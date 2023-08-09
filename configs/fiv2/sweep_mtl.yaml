@@ -1,0 +1,65 @@
+
+project: perceiver_affection_spd_trainval_3090_fiv2
+
+program: main.py
+name: mtl_seed
+method: grid
+parameters:
+  dataset:
+    values: [ "fiv2" ]
+  arch:
+    values: [ 'perceiver' ]
+  depth:
+    values: [5]
+
+  num_latents:
+    values: [128]
+  latent_dim:
+    values: [128]
+  lr:
+    values: [ 0.004]
+
+  wandb_mode:
+    values: ["online"]
+  scheduler:
+    values: ["constant"]
+  optimizer:
+        values: ["lamb"]
+  seed:
+    values: [ 6, 1995, 1996]
+
+  epochs:
+    values: [5]
+
+
+  gamma:
+    values: [ 0, 0.1, 1, 10, 100, 1000  ]
+  batch_size:
+    values: [128]
+  finetune:
+    values: [ "/DATA/jj/affection/fiv2_results/trainval_3090_baseline/gender/xxx_lr0.004_e60_seedsss_optlamb_bs128_beta0.5_alpha_0.1_gamma_1_beta_0.5/last.ckpt" ]
+
+  modalities:
+    values:  ["text", "facebody", "audio", "text_facebody", "text_audio", "facebody_audio", "text_facebody_audio"]
+  is_baseline:
+    values: [0]
+
+
+  results_dir:
+    values: ["/DATA/jj/affection/fiv2_results/trainval_3090_second"]
+
+  eval_every_n_epoch:
+    values: [1]
+  target_sensitive_group:
+    values: [  "gender" , "ethnicity"] #,
+metric:
+  goal: minimize
+  name: test_loss
+
+
+
+
+
+
+
+

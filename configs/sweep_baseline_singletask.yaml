@@ -1,0 +1,70 @@
+
+project: perceiver_affection_baseline_trainval_3090_personality
+program: main.py
+#project: tmp
+#program: tmp.py
+
+name: baseline
+method: grid
+parameters:
+  arch:
+    values: [ 'perceiver' ]
+  depth:
+    values: [5]
+
+  num_latents:
+    values: [128]
+  latent_dim:
+    values: [128]
+  lr:
+    values: [0.004]
+
+  wandb_mode:
+    values: ["online"]
+  scheduler:
+    values: ["constant"]
+  optimizer:
+        values: ["lamb"]
+  seed:
+    values: [ 6, 1995, 1996]
+  modalities:
+    values: ["text", "facebody", "audio", "text_facebody", "text_audio", "facebody_audio", "text_facebody_audio"]
+
+  epochs:
+    values: [45]
+  target_personality:
+    values: [0, 1, 2, 3, 4]
+
+  eval_every_n_epoch:
+    values: [1]
+
+  is_baseline:
+    values: [1]
+
+  results_dir:
+#    values: ["/DATA/jj/affection/results/trainval_3090_baseline_personality"]
+    values: ["/DATA/jj/affection/results/trainval_3090_baseline_personality_testonly"]
+
+  num_outputs:
+    values: [5]
+
+
+  ### for unified format results report
+  test_only:
+    values: [1]
+
+  finetune:
+    values: [ "/DATA/jj/affection/results/trainval_3090_baseline_personality/gender/xxx_lr0.004_e45_seedsss_optlamb_bs128_beta0.5_alpha_0.1_gamma_1_beta_0.5/personality_ppp/last.ckpt" ]
+
+
+metric:
+  goal: minimize
+  name: test_loss
+
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+project: perceiver_affection_onestage_trainval_3090
+#project: perceiver_affection_spd_trainval_3090
+
+program: main.py
+name: one_stage
+method: grid
+parameters:
+  arch:
+    values: [ 'perceiver' ]
+  depth:
+    values: [5]
+
+  num_latents:
+    values: [128]
+  latent_dim:
+    values: [128]
+  lr:
+    values: [ 0.004] # lr 0.001 with gamma 5 is little bit low performance;
+
+  wandb_mode:
+    values: ["online"]
+  scheduler:
+    values: ["constant"]
+  optimizer:
+        values: ["lamb"]
+  seed:
+    values: [ 6, 1995, 1996]
+  epochs:
+    values: [5]
+  # gamma bigger than 100 will have big impact on the val loss for audio
+  gamma:
+    values: [ 5 ]
+  batch_size:
+    values: [128]
+  finetune:
+    values: [ "/DATA/jj/affection/results/trainval_3090_baseline_final/gender/xxx_lr0.004_e60_seedsss_optlamb_bs128_beta0.5_alpha_0.1_gamma_1_beta_0.5/last.ckpt" ]
+
+  modalities:
+#    values: [ "text"]
+    values:  ["text", "facebody", "audio", "text_facebody", "text_audio", "facebody_audio", "text_facebody_audio"]
+
+  is_baseline:
+    values: [0]
+
+  use_distribution_loss:
+    values: [1]
+
+  results_dir:
+    values: ["/DATA/jj/affection/results/trainval_onestage"]
+
+  eval_every_n_epoch:
+    values: [1]
+  target_sensitive_group:
+    values: [ "age"]
+
+  one_stage:
+    values: [1]
+
+metric:
+  goal: minimize
+  name: test_loss
+
+
+
+
+
+
+
+

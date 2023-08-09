@@ -1,0 +1,60 @@
+
+project: perceiver_fiv2_baseline_trainval_3090_singletask
+program: main.py
+
+name: baseline
+method: grid
+parameters:
+  dataset:
+    values: [ "fiv2" ]
+  arch:
+    values: [ 'perceiver' ]
+  depth:
+    values: [5]
+
+  num_latents:
+    values: [128]
+  latent_dim:
+    values: [128]
+  lr:
+    values: [0.004]
+
+  wandb_mode:
+    values: ["online"]
+  scheduler:
+    values: ["constant"]
+  optimizer:
+        values: ["lamb"]
+  seed:
+    values: [ 6, 1995, 1996]
+  modalities:
+    values: ["text", "facebody", "audio", "text_facebody", "text_audio", "facebody_audio", "text_facebody_audio"]
+
+  epochs:
+    values: [45]
+  target_personality:
+    values: [0, 1, 2, 3, 4]
+
+  eval_every_n_epoch:
+    values: [1]
+
+  is_baseline:
+    values: [1]
+
+  results_dir:
+    values: ["/DATA/jj/affection/results/trainval_3090_fiv2_baseline_singletask"]
+
+  num_outputs:
+    values: [5]
+
+metric:
+  goal: minimize
+  name: test_loss
+
+
+
+
+
+
+
+

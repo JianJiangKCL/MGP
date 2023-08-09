@@ -1,0 +1,44 @@
+project: perceiver_affection_spd_FIV2_v100_trainval
+name: second
+## general args
+# model
+arch : perceiver
+
+dataset : fiv2
+modalities : ['text']
+
+depth : 5
+num_latents : 128
+latent_dim : 128
+cross_heads : 1
+latent_heads : 8
+cross_dim_head : 64
+latent_dim_head : 64
+num_outputs : 5
+
+
+# train
+lr : 0.004
+epochs : 5
+
+num_workers : 4
+batch_size : 128
+
+distributed : False
+eval_every_n_epoch : 1
+gpus : 1
+optimizer : lamb
+scheduler : constant
+seed : 1995
+is_baseline : 0
+gamma : 5
+use_distribution_loss : 1
+
+
+#finetune: "H:/tmp_results/senti_speech_time_lr0.004_e60_seed1995_optlamb_bs128_beta0.5_alpha_0.1_gamma_1/last.ckpt"
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+project: mmim_affection_spd_trainval_3090
+
+program: main.py
+name: mtl_seed
+method: grid
+parameters:
+  arch:
+    values: [ 'infomax' ]
+
+  dataset:
+    values: [ udiva ]
+
+  cpc_layers:
+    values: [ 2 ]
+
+  dropout_prj:
+    values: [ 0]
+  lr:
+    values: [ 0.001 ] # 0.004 will cause nan problem # i think it is because of the adam # however, baseline 0.004 with lamb has nan
+
+  wandb_mode:
+    values: ["online"]
+  scheduler:
+    values: ["constant"]
+  optimizer:
+        values: ["lamb"]
+  seed:
+    values: [6, 1995, 1996]
+
+  epochs:
+    values: [ 5]
+
+  gamma:
+    values: [ 5 ]
+  batch_size:
+    values: [128]
+
+  finetune:
+    values: [ "/DATA/jj/affection/mmim_results/baseline/gender/text_facebody_audio_lr0.001_e30_seedsss_optlamb_bs128_beta0.5_alpha_0.3_gamma_1_beta_0.5_sigma_0.1_cpc2_dropout_0.3/last.ckpt" ]
+
+  modalities:
+    values: [ "text_facebody_audio"]
+  is_baseline:
+    values: [0]
+
+  use_distribution_loss:
+    values: [1]
+
+  results_dir:
+    values: ["/DATA/jj/affection/mmim_results/second"]
+
+  eval_every_n_epoch:
+    values: [1]
+  target_sensitive_group:
+    values: [ "age", "gender" ]
+metric:
+  goal: minimize
+  name: test_loss
+
+
+
+
+
+
+
+
